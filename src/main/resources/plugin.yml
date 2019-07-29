@@ -1,0 +1,5 @@
+name: AutoInv
+main: autoinv.Main
+version: "${pom.version}"
+api: ["1.0.0"]
+author: PetteriM1
