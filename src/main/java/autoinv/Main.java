@@ -33,5 +33,7 @@ public class Main extends PluginBase implements Listener {
             }
         }
         e.setDrops(notAdded.toArray(new Item[0]));
+        p.addExperience(e.getDropExp());
+        e.setDropExp(0);
     }
 }
