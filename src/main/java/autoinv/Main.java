@@ -24,24 +24,10 @@ public class Main extends PluginBase implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBreak(BlockBreakEvent e) {
-        if (e.isCancelled()) return;
-        Player p = e.getPlayer();
-        PlayerInventory inv = p.getInventory();
-        Item[] itemsToAdd = e.getDrops();
-        int count = itemsToAdd.length;
-        if (count > 0) {
-            List<Item> notAdded = new ArrayList<>();
-            for (int i = 0; i < count; i++) {
-                if (inv.canAddItem(itemsToAdd[i])) {
-                    inv.addItem(itemsToAdd[i]);
-                } else {
-                    notAdded.add(itemsToAdd[i]);
-                }
-            }
-            e.setDrops(notAdded.toArray(new Item[0]));
-        }
         int xp = e.getDropExp();
         if (xp > 0) {
+            Player p = e.getPlayer();
+            PlayerInventory inv = p.getInventory();
             ArrayList<Integer> itemsWithMending = new ArrayList<>();
             int size = inv.getSize();
             for (int i = 0; i < 4; i++) {
