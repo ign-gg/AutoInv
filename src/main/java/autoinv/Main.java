@@ -5,6 +5,7 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.block.BlockBreakEvent;
+import cn.nukkit.event.entity.EntityArmorChangeEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemArmor;
@@ -72,6 +73,13 @@ public class Main extends PluginBase implements Listener {
                 }
             }
             e.setDropExp(0);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onArmorEquip(EntityArmorChangeEvent e) {
+        if (e.getEntity() instanceof Player && e.getNewItem().hasEnchantment(Enchantment.ID_MENDING)) {
+            ((Player) e.getEntity()).sendActionBar("[!] Equipped armor has mending enchantment.\nAll experience is directly used to repair it.");
         }
     }
 }
