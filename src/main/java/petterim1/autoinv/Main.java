@@ -16,8 +16,6 @@ import cn.nukkit.network.protocol.LevelEventPacket;
 import cn.nukkit.plugin.PluginBase;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main extends PluginBase implements Listener {
@@ -30,23 +28,6 @@ public class Main extends PluginBase implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void BlockBreakEvent(BlockBreakEvent e) {
         Player p = e.getPlayer();
-        PlayerInventory inventory = p.getInventory();
-        Item[] itemsToAdd = e.getDrops();
-
-        if (itemsToAdd.length > 0) {
-            List<Item> notAdded = new ArrayList<>();
-
-            for (Item item : itemsToAdd) {
-                if (inventory.canAddItem(item)) {
-                    inventory.addItem(item);
-                } else {
-                    notAdded.add(item);
-                }
-            }
-
-            e.setDrops(notAdded.toArray(new Item[0]));
-        }
-
         int exp = e.getDropExp();
         if (exp <= 0) {
             return;
@@ -132,7 +113,6 @@ public class Main extends PluginBase implements Listener {
                         inventory.setItem(itemToRepair, repaired);
                     }
 
-                    p.sendTip("§b* §7Mending §b*");
                     return true;
                 }
             }
