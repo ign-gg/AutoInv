@@ -50,7 +50,7 @@ public class Main extends PluginBase implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void PlayerInteractEvent(PlayerInteractEvent e) {
-        if (e.getAction() == PlayerInteractEvent.Action.PHYSICAL) {
+        if (e.getAction() != PlayerInteractEvent.Action.LEFT_CLICK_AIR && e.getAction() != PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
             return;
         }
 
